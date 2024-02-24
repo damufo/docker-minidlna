@@ -2,16 +2,17 @@ version: '3'
 
 services:
   minidlna:
-    image: croc/minidlna
+    image: damufo/minidlna
+    container_name: minidlna
     environment:
-      - SRVNAME=docker-minidlna
+      - SRVNAME=${MINIDLNA_SRVNAME}
       - PORT=8205
       # specify an UPNP interface if you have multiple network interface
-      #- SSDP_IFACE=eth0
-      - FOLDERS=/media/mp3,/media/movies,/media/tv_series
+      #- SSDP_IFACE=${MINIDLNA_IFACE}
+      - FOLDERS=${MINIDLNA_FOLDER_AUDIO}, ${MINIDLNA_FOLDER_VIDEO}, ${MINIDLNA_FOLDER_IMAGE}
     volumes:
-      - '/mnt/data/pub/movies:/media/movies'
-      - '/mnt/data/pub/tv_series:/media/tv_series'
-      - '/mnt/data/pub/mp3:/media/mp3'
+      - '${MINIDLNA_VOLUME_AUDIO}:${MINIDLNA_FOLDER_AUDIO}'
+      - '${MINIDLNA_VOLUME_VIDEO}:${MINIDLNA_FOLDER_VIDEO}'
+      - '${MINIDLNA_VOLUME_IMAGE}:${MINIDLNA_FOLDER_IMAGE}'
     network_mode: 'host'
-    restart: always
+    restart: unless-stopped

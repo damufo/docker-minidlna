@@ -1,25 +1,47 @@
 
 # Minidlna in docker container
 
-Not the best container, but works :)
+
+Fork from crocandr. Thanks!
+
 
 ## Build
 
 ```
-docker build -t croc/minidlna .
+docker build -t damufo/minidlna:latest .
 ```
 
-## Run
+## Setting general configuration
+```
+git clone https://github.com/damufo/docker-minidlna.git
+cd docker-minidlna
+cp sample.env .env
+nano .env
+```
+
+## Variables .env file
 
 ```
-docker run -tid --name=minidlna --net=host -e SRVNAME=dockerlna -e "FOLDERS=/mnt/data/mp3,/mnt/data/movie,/mnt/data/torrent" -v /mnt/data/pub/:/mnt/data croc/minidlna
+MINIDLNA_SRVNAME: name of de minidlna server
+
+MINIDLNA_FOLDER_AUDIO: folder to set minidlna config file
+MINIDLNA_FOLDER_VIDEO: folder to set minidlna config file
+MINIDLNA_FOLDER_IMAGE: folder to set minidlna config file
+
+MINIDLNA_VOLUME_AUDIO: folder host to mount as volume
+MINIDLNA_VOLUME_VIDEO: folder host to mount as volume
+MINIDLNA_VOLUME_IMAGE: folder host to mount as volume
+
+MINIDLNA_IFACE: when exist more one interface, set specify here the name, example eth0. IMPORTANT! in this case, uncomment line that start as '#- SSDP_IFACE...' in docker-compose.yml
 ```
 
-  - `SRVNAME` - name of the minidlna server
-  - `FOLDERS` - list of the shared folders on your volume (/mnt/data)
 
-Please use docker-compose file (from my Github page) for easier management. 
+## Start container
 
+```
+docker compose start -d
+docker compose logs -f
+```
 
 ## Known errors
 
