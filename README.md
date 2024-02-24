@@ -19,7 +19,7 @@ cp sample.env .env
 nano .env
 ```
 
-## Variables .env file
+## Description for .env file variables
 
 ```
 MINIDLNA_SRVNAME: name of de minidlna server
@@ -32,9 +32,9 @@ MINIDLNA_VOLUME_AUDIO: folder host to mount as volume
 MINIDLNA_VOLUME_VIDEO: folder host to mount as volume
 MINIDLNA_VOLUME_IMAGE: folder host to mount as volume
 
-MINIDLNA_IFACE: when exist more one interface, set specify here the name, example eth0. IMPORTANT! in this case, uncomment line that start as '#- SSDP_IFACE...' in docker-compose.yml
+# MINIDLNA_IFACE: when exist more one interface, uncoment this line and set iface name, example: eth0.
 ```
-
+IMPORTANT! when exist more one interface, uncomment line that start as '#- SSDP_IFACE...' in docker-compose.yml
 
 ## Start container
 
